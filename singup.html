@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+	margin:0;
+	color:#6a6f8c;
+	background:#c8c8c8;
+	font:600 16px/18px 'Open Sans',sans-serif;
+}
+:root {
+    --primary-color: #F7561B;
+    --primary-dark-color: #FD6D2A;
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
+    --checkmark-color: #43b324;
+    --white-color: #fff;
+}
+
+
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
+
+.login-wrap{
+    min-height: 125vh;
+	margin:0 auto;
+	max-width:750px;
+	position:relative;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:90px 70px 50px 70px;
+	background:rgba(40,57,101,.9);
+}
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+	transform:rotateY(180deg);
+	backface-visibility:hidden;
+	transition:all .4s linear;
+}
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+	display:none;
+}
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+	text-transform:uppercase;
+
+}
+.login-html .tab{
+	font-size:25px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 17px 20px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+}
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+	color:#fff;
+	border-color:#1161ee;
+}
+.login-form{
+	min-height:345px;
+	position:relative;
+	perspective:1000px;
+	transform-style:preserve-3d;
+}
+.login-form .group{
+	margin-bottom: 35px;
+}
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+.login-form .group .input,
+.login-form .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group input[data-type="password"]{
+	text-security:circle;
+	-webkit-text-security:circle;
+}
+
+.login-form .group .label{
+	color:#e9e9e9;
+	font-size:15px;
+}
+.login-form .group .button{
+	background:#1161ee;
+    margin-top: 15px;
+    text-align: center;
+}
+.login-form .group label .icon{
+	width:15px;
+	height:15px;
+	border-radius:2px;
+	position:relative;
+	display:inline-block;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group label .icon:before,
+.login-form .group label .icon:after{
+	content:'';
+	width:10px;
+	height:2px;
+	background:#fff;
+	position:absolute;
+	transition:all .2s ease-in-out 0s;
+}
+.login-form .group label .icon:before{
+	left:3px;
+	width:5px;
+	bottom:6px;
+	transform:scale(0) rotate(0);
+}
+.login-form .group label .icon:after{
+	top:6px;
+	right:0;
+	transform:scale(0) rotate(0);
+}
+.login-form .group .check:checked + label{
+	color:#fff;
+}
+.login-form .group .check:checked + label .icon{
+	background:#1161ee;
+}
+.login-form .group .check:checked + label .icon:before{
+	transform:scale(1) rotate(45deg);
+}
+.login-form .group .check:checked + label .icon:after{
+	transform:scale(1) rotate(-45deg);
+}
+.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+	transform:rotate(0);
+}
+.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+	transform:rotate(0);
+}
+
+.i-c-t{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: whitesmoke;
+}
+
+.form-control input:focus {
+    outline: none;
+    border-color: #777;
+}
+
+.form-control.success input {
+    border-color: var(--success-color);
+}
+
+.form-control.error input {
+    border-color: var(--error-color);
+}
+
+.form-control.success:after {
+    opacity: 1;
+    transform: translateY(-50%);
+}
+
+.form-control small {
+    color: var(--error-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+.form-control.error small {
+    visibility: visible;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    <div class="group">
+                        <label for="login-username" class="label">Username</label>
+                        <input id="login-username"  type="text" class="input" >
+                    </div>
+                    <div class="group">
+                        <label for="login-password" class="label">Password</label>
+                        <input id="login-password" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <button type="submit" class="button" id="login-submit">Sign In</button> 
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="#forgot">Forgot Password?</a>
+                    </div>
+                </div>
+                <div class="sign-up-htm">
+                    <form class="signup-form" action="#" method="post" id="signup-form">
+                    <div class="group form-control">
+                        <label for="number" class="label">Phone Number</label>
+                        <input id="number" type="number" class="input"  data-type="number" >
+                        <small>Enter your phone number</small>
+                    </div>
+                    <div class="group form-control">
+                        <label for="user" class="label">Username</label>
+                        <input id="user"type="text" class="input" data-type="text" >
+                        <small>Enter your username</small>
+                    </div>
+                    <div class="group form-control">
+                        <label for="pass" class="label">Login Password</label>
+                        <input id="pass" type="password" class="input">
+                        <small>Enter your password</small>
+                    </div>
+                    <div class="group form-control">
+                        <label for="cpass" class="label">Confirm Password</label>
+                        <input id="cpass" type="password" class="input"   > 
+                        <small>Confirm your password</small>
+                    </div>
+                    <div class="group form-control">
+                        <label for="wpass" class="label">Withdrawal Password</label>
+                        <input id="wpass" type="password" class="input">
+                        <small>Enter your withdrawal password</small>
+                    </div>
+                    <div class="group form-control">
+                        <label for="cwpass" class="label">Confirm Withdrawal Password</label>
+                        <input id="cwpass" type="password" class="input" >
+                        <small>Confirm your withdrawal password</small>
+                    </div>
+                    <div class="group form-control">
+                        <label for="i_code" class="label">Invitation-code</label>
+                        <input id="i_code" type="text" class="input" data-type="text" > 
+                        <small>Enter your invitation code</small>
+                    </div>
+                    <a href="#" class="i-c-t">I don't have an invitation code?</a>
+                    <div class="group">
+                      <button type="submit" class="button" id="signup-submit">Sign Up</button> 
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    // Function to validate the sign-in form
+    function validateSignInForm() {
+        const username = document.getElementById('login-username');
+        const password = document.getElementById('login-password');
+
+        if (username.value.trim() === '') {
+            showError(username, 'Username is required');
+            return false;
+        } else {
+            showSuccess(username);
+        }
+
+        if (password.value.trim() === '') {
+            showError(password, 'Password is required');
+            return false;
+        } else {
+            showSuccess(password);
+        }
+
+        return true;
+    }
+
+    // Function to validate the sign-up form
+    function validateSignUpForm() {
+        const number = document.getElementById('number');
+        const user = document.getElementById('user');
+        const pass = document.getElementById('pass');
+        const cpass = document.getElementById('cpass');
+        const wpass = document.getElementById('wpass');
+        const cwpass = document.getElementById('cwpass');
+        const i_code = document.getElementById('i_code');
+
+        let isValid = true;
+
+        if (number.value.trim() === '') {
+            showError(number, 'Phone number is required');
+            isValid = false;
+        } else {
+            showSuccess(number);
+        }
+
+        if (user.value.trim() === '') {
+            showError(user, 'Username is required');
+            isValid = false;
+        } else {
+            showSuccess(user);
+        }
+
+        if (pass.value.trim() === '') {
+            showError(pass, 'Password is required');
+            isValid = false;
+        } else {
+            showSuccess(pass);
+        }
+
+        if (cpass.value.trim() === '') {
+            showError(cpass, 'Confirm password is required');
+            isValid = false;
+        } else if (cpass.value !== pass.value) {
+            showError(cpass, 'Passwords do not match');
+            isValid = false;
+        } else {
+            showSuccess(cpass);
+        }
+
+        // Similarly, validate other fields as needed
+
+        return isValid;
+    }
+
+    // Function to show error message
+    function showError(input, message) {
+        const formControl = input.parentElement;
+        formControl.className = 'group form-control error';
+        let small = formControl.querySelector('small');
+        small.innerText = message;
+    }
+
+    // Function to show success message
+    function showSuccess(input) {
+        const formControl = input.parentElement;
+        formControl.className = 'group form-control success';
+    }
+
+    // Event listener for sign-in form submission
+    document.getElementById('login-submit').addEventListener('click', function (e) {
+        if (!validateSignInForm()) {
+            e.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+
+    // Event listener for sign-up form submission
+    document.getElementById('signup-submit').addEventListener('click', function (e) {
+        if (!validateSignUpForm()) {
+            e.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+</script>
+
+</html>
